@@ -1,4 +1,5 @@
 <template>
+    <div>
     <v-layout
             column
             justify-center
@@ -14,7 +15,7 @@
                     Create Planet/Star/Moon
                 </v-card-title>
                 <v-card-text>
-                    <form @submit.prevent="addArticle">
+                    <form>
                         <v-text-field
                                 v-model="planetName"
                                 label="Planet Name"
@@ -50,7 +51,7 @@
                                 label="Planet type (in numbers)"
                                 required
                         />
-                        <v-btn text v-on:click="save()">
+                        <v-btn text @click="save">
                             Add planet
                         </v-btn>
                     </form>
@@ -58,35 +59,39 @@
             </v-card>
         </v-flex>
     </v-layout>
+    </div>
 </template>
+
 <script>
+    import axios from 'axios';
     export default {
-        data:() => ({
+        mounted() {
+            this.save()
+        },
+        data()  {
+            return{
+            universes:[],
             planetName: '',
-            price: '',
-            population: '',
+            price: +'',
+            population:+ '',
             gravity: '',
             size: '',
             mainResource: '',
-            planetType: ''
-        }),
+            planetType:+ ''
+        }},
         methods: {
-            /**
-             * [addArticle used to Add Article]
-             */
             save() {
-                const baseURI = 'http://planetcrossdis.azurewebsites.net/api/planets';
-                axios.post(baseURI,{
+                axios.post('http://planetcrossdis.azurewebsites.net/api/planets'
+                ,{
                     planetName: this.planetName,
-                    price: this.price,
-                    population: this.population,
+                    price: +this.price,
+                    population: +this.population,
                     gravity: this.gravity,
                     size: this.size,
                     mainResource: this.mainResource,
-                    planetType: this.planetType
-                })
-                    .then((result) => {console.log(result)})
+                    planetType: +this.planetType
+                });
             }
         }
-    }
+    };
 </script>
