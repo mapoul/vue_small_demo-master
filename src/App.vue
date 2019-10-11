@@ -1,13 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-
       <router-link to="/universe"><v-btn>Read</v-btn></router-link>
       <router-link to="/planets-create"><v-btn>Create</v-btn></router-link>
       <router-link to="/planets-update"><v-btn>Update</v-btn></router-link>
-
-
-
+      <router-link to="/planets-delete"><v-btn>Delete</v-btn></router-link>
     </div>
     <router-view/>
   </div>

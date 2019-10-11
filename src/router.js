@@ -8,6 +8,7 @@ import ShoesList from "./views/shoes/ShoesList";
 import Planets from "./views/universe/Planets";
 import PlanetsCreate from "./views/universe/PlanetsCreate";
 import PlanetsUpdate from "./views/universe/PlanetsUpdate";
+import PlanetsDelete from "./views/universe/PlanetsDelete";
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
       path: '/planets-update',
       name: 'planets-update',
       component: PlanetsUpdate
+    },
+    {
+      path: '/planets-delete',
+      name: 'planets-delete',
+      component: PlanetsDelete
     },
     {
       path: '/about',
