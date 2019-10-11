@@ -66,7 +66,7 @@
     import axios from 'axios';
     export default {
         mounted() {
-            this.save()
+
         },
         data()  {
             return{

@@ -1,14 +1,17 @@
 <template>
     <div id="app">
         <ul>
-            <li v-for="univers in universes" v-bind:key="univers.Id" >{{univers}}</li>
+            <li v-for="universe in universes" v-bind:key="universe.Id" >{{universe}}</li>
         </ul>
-
-        <v-btn
-                color="pink"
-                text
-                @click="deletedSuccess = false"
-        >Delete</v-btn>
+        <v-snackbar
+                v-model="deletedSuccess">
+            {{ deletedText }}
+            <v-btn
+                    color="pink"
+                    text
+                    @click="deletedSuccess = false"
+            >Close</v-btn>
+        </v-snackbar>
     </div>
 
 </template>
@@ -21,6 +24,8 @@
             return{
                 IsLoading: false,
                 universes: [],
+                deletedSuccess: false,
+                deletedText: 'Planet deleted'
             };
         },
         created(){
@@ -34,9 +39,19 @@
                         this.universes = response.data;
                         this.IsLoading = false
                     })
+
             },
+            async deletePlanet(universe) {
+                let result = await axios.delete('univers/' + universe.id)
+                this.deletedSuccess = true;
+                if(result.status !== 200) {
+                    // this.albums.push(album)
+                } else {
+                    this.fetch()
+                }
         },
-    };
+    },
+    }
 
 </script>
 
